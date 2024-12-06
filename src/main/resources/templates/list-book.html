@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Book Details</title>
+  <!-- Include Bootstrap CSS -->
+  <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+  />
+  <style>
+    /* Custom styling for rows with underline */
+    .book-detail-row {
+        padding: 10px 0;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .book-detail-row:last-child {
+        border-bottom: none;
+    }
+
+    /* Custom header styling */
+    .book-header {
+        background-color: #004085;
+        color: white;
+        padding: 10px;
+        font-size: 1.25rem;
+        border-radius: 0.25rem;
+    }
+
+    /* Back button styling */
+    .back-button {
+        margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+<!-- Include Header -->
+<div th:insert="header :: header"></div>
+
+<main class="container mt-5">
+  <h1 class="text-center mb-4">Book Details</h1>
+
+  <div class="card shadow-sm">
+    <div class="book-header text-center">
+      Book Information
+    </div>
+    <div class="card-body">
+      <!-- ISBN -->
+      <div class="row book-detail-row">
+        <div class="col-sm-3 fw-bold">ISBN:</div>
+        <div class="col-sm-9" th:text="${book.isbn}"></div>
+      </div>
+      <!-- Book Name -->
+      <div class="row book-detail-row">
+        <div class="col-sm-3 fw-bold">Book Name:</div>
+        <div class="col-sm-9" th:text="${book.name}"></div>
+      </div>
+      <!-- Description -->
+      <div class="row book-detail-row">
+        <div class="col-sm-3 fw-bold">Description:</div>
+        <div class="col-sm-9" th:text="${book.description}"></div>
+      </div>
+      <!-- Authors -->
+      <div class="row book-detail-row">
+        <div class="col-sm-3 fw-bold">Authors:</div>
+        <div class="col-sm-9">
+          <ul class="list-unstyled">
+            <li th:each="author : ${book.authors}" th:text="${author.name}"></li>
+          </ul>
+        </div>
+      </div>
+      <!-- Categories -->
+      <div class="row book-detail-row">
+        <div class="col-sm-3 fw-bold">Categories:</div>
+        <div class="col-sm-9">
+          <ul class="list-unstyled">
+            <li th:each="category : ${book.categories}" th:text="${category.name}"></li>
+          </ul>
+        </div>
+      </div>
+      <!-- Publishers -->
+      <div class="row book-detail-row">
+        <div class="col-sm-3 fw-bold">Publishers:</div>
+        <div class="col-sm-9">
+          <ul class="list-unstyled">
+            <li th:each="publisher : ${book.publishers}" th:text="${publisher.name}"></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Back to List Button -->
+  <div class="text-center back-button">
+      <a href="/books/all" class="btn btn-outline-primary btn-lg">Back to List</a>
+  </div>
+</main>
+
+<!-- Include Bootstrap JS -->
+<script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+></script>
+</body>
+</html>

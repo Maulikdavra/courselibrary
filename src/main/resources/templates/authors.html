@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Authors Management</title>
+  <!-- Include Bootstrap CSS -->
+  <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+  />
+</head>
+<body>
+<!-- Include Header -->
+<div th:insert="header :: header"></div>
+
+<main class="container mt-5">
+  <h1 class="text-center">Authors Management</h1>
+
+  <div class="card shadow-sm">
+    <div class="card-header text-center fw-bold fs-4">Author List</div>
+    <div class="card-body">
+      <table class="table table-bordered table-hover text-center">
+        <thead class="table-light">
+        <tr>
+          <th>Author Name</th>
+          <th>Description</th>
+          <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="author : ${authors}">
+          <td th:text="${author.name}"></td>
+          <td th:text="${author.description}"></td>
+          <td>
+            <!-- View Button -->
+            <a
+                    class="btn btn-info btn-sm me-2"
+                    th:href="@{/authors/view/{id}(id=${author.id})}"
+                    title="View Author Details"
+            >
+              <img src="/icons/view-icon.png" alt="View" style="width: 24px; height: 24px;" />
+            </a>
+
+            <!-- Edit Button -->
+            <a
+                    class="btn btn-warning btn-sm me-2"
+                    th:href="@{/authors/edit/{id}(id=${author.id})}"
+                    title="Edit Author"
+            >
+              <img src="/icons/edit-icon.png" alt="Edit" style="width: 24px; height: 24px;" />
+            </a>
+
+            <!-- Delete Button -->
+            <a
+                    class="btn btn-danger btn-sm"
+                    th:href="@{/authors/delete/{id}(id=${author.id})}"
+                    onclick="return confirm('Are you sure you want to delete this author?');"
+                    title="Delete Author"
+            >
+              <img src="/icons/delete-icon.png" alt="Delete" style="width: 24px; height: 24px;" />
+            </a>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</main>
+
+<!-- Include Bootstrap JS -->
+<script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+></script>
+</body>
+</html>
